@@ -1,0 +1,45 @@
+diff --git a/config.def.h b/config.def.h
+index 82b1b09..8ccc210 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -6,6 +6,12 @@
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+ static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
++
++/* disable bold, italic and roman fonts globally */
++static int disablebold = 0;
++static int disableitalic = 0;
++static int disableroman = 0;
++
+ static int borderpx = 2;
+ 
+ /*
+diff --git a/x.c b/x.c
+index c343ba2..8940c3d 100644
+--- a/x.c
++++ b/x.c
+@@ -954,17 +954,20 @@ xloadfonts(char *fontstr, double fontsize)
+ 	win.ch = ceilf(dc.font.height * chscale);
+ 
+ 	FcPatternDel(pattern, FC_SLANT);
+-	FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
++	if (!disableitalic)
++		FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
+ 	if (xloadfont(&dc.ifont, pattern))
+ 		die("st: can't open font %s\n", fontstr);
+ 
+ 	FcPatternDel(pattern, FC_WEIGHT);
+-	FcPatternAddInteger(pattern, FC_WEIGHT, FC_WEIGHT_BOLD);
++	if (!disablebold)
++		FcPatternAddInteger(pattern, FC_WEIGHT, FC_WEIGHT_BOLD);
+ 	if (xloadfont(&dc.ibfont, pattern))
+ 		die("st: can't open font %s\n", fontstr);
+ 
+ 	FcPatternDel(pattern, FC_SLANT);
+-	FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ROMAN);
++	if (!disableroman)
++		FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ROMAN);
+ 	if (xloadfont(&dc.bfont, pattern))
+ 		die("st: can't open font %s\n", fontstr);
+ 
