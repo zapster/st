@@ -1,6 +1,6 @@
 Name:             st
 Version:          0.8.1
-Release:          2%{?dist}
+Release:          2%{?dist}_patched
 Summary:          A simple terminal implementation for X
 %global           _stsourcedir %{_usrsrc}/%{name}-user-%{version}-%{release}
 License:          MIT
@@ -9,6 +9,12 @@ Source0:          http://dl.suckless.org/%{name}/%{name}-%{version}.tar.gz
 Source1:          %{name}.desktop
 Source2:          %{name}-user
 Source3:          %{name}-user.1
+Patch0:           st-clipboard-20180309-c5ba9c0.diff
+Patch1:           st-disable-bold-italic-fonts-0.8.1.diff
+Patch2:           st-externalpipe-0.8.diff
+Patch3:           st-spoiler-20180309-c5ba9c0.diff
+Patch4:           st-xresources-0.8.1.diff
+Patch5:           st-vertcenter-0.8.1.diff
 BuildRequires:    binutils
 BuildRequires:    coreutils
 BuildRequires:    gcc
@@ -47,7 +53,7 @@ Source files for st and a launcher/builder wrapper script for
 customized configurations.
 
 %prep
-%setup -q
+%autosetup
 # terminfo entries are provided by ncurses-base
 sed -e "/tic .*st.info/d" -i Makefile
 
