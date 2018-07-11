@@ -1,6 +1,6 @@
 Name:             st
 Version:          0.8.1
-Release:          2%{?dist}_patched
+Release:          2%{?dist}_patched2
 Summary:          A simple terminal implementation for X
 %global           _stsourcedir %{_usrsrc}/%{name}-user-%{version}-%{release}
 License:          MIT
@@ -15,6 +15,8 @@ Patch2:           st-externalpipe-0.8.diff
 Patch3:           st-spoiler-20180309-c5ba9c0.diff
 Patch4:           st-xresources-0.8.1.diff
 Patch5:           st-vertcenter-0.8.1.diff
+Patch6:           st-blinking-cursor-0.8.1.diff
+Patch7:           st-xresources-extra-0.8.1.diff
 BuildRequires:    binutils
 BuildRequires:    coreutils
 BuildRequires:    gcc
@@ -114,6 +116,14 @@ fi
 %{_stsourcedir}
 
 %changelog
+* Fri Jul 6 2018 Josef Eisl <zapster@zapster.cc> - 0.8.1-2_patched2
+- Blinking cursor support https://lists.suckless.org/hackers/1801/15783.html
+- Extra xresources changes for more configuration support
+
+* Fri Jul 6 2018 Josef Eisl <zapster@zapster.cc> - 0.8.1-2_patched
+- Install patches from https://st.suckless.org/patches
+- (clipboard, disable, externalpipe, spoiler, xresources, vertcenter)
+
 * Thu May 10 2018 Petr Šabata <contyk@redhat.com> - 0.8.1-2
 - Install all source files for st-user (rhbz#1574165)
 
