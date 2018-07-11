@@ -1,0 +1,27 @@
+diff --git a/config.def.h b/config.def.h
+index 18e179c..b7d9be9 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -182,6 +182,10 @@ ResourcePref resources[] = {
+ 		{ "background",   STRING,  &colorname[256] },
+ 		{ "foreground",   STRING,  &colorname[257] },
+ 		{ "cursorColor",  STRING,  &colorname[258] },
++		{ "cursorshape",  INTEGER, &cursorshape },
++		{ "disablebold",  INTEGER, &disablebold },
++		{ "disableroman", INTEGER, &disableroman },
++		{ "disableitalic",INTEGER, &disableitalic },
+ 		{ "termname",     STRING,  &termname },
+ 		{ "shell",        STRING,  &shell },
+ 		{ "xfps",         INTEGER, &xfps },
+diff --git a/x.c b/x.c
+index 77e3761..28ab215 100644
+--- a/x.c
++++ b/x.c
+@@ -2031,6 +2031,7 @@ run:
+ 		die("Can't open display\n");
+ 
+ 	config_init();
++	win.cursor = cursorshape;
+ 	cols = MAX(cols, 1);
+ 	rows = MAX(rows, 1);
+ 	tnew(cols, rows);
