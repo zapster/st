@@ -1,6 +1,6 @@
 Name:             st
-Version:          0.8.1
-Release:          6%{?dist}
+Version:          0.8.4
+Release:          1%{?dist}
 Summary:          A simple terminal implementation for X
 %global           _stsourcedir %{_usrsrc}/%{name}-user-%{version}-%{release}
 License:          MIT
@@ -66,7 +66,7 @@ sed -i -e 's/VERSION/%{version}/' \
        ${file}
 done
 mkdir -p %{buildroot}%{_stsourcedir}
-install -m644 config.mk Makefile st.info *.h *.c \
+install -m644 config.mk Makefile st.* *.h *.c \
     %{buildroot}%{_stsourcedir}
 touch %{buildroot}%{_bindir}/%{name}
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications %{SOURCE1}
@@ -107,6 +107,9 @@ fi
 %{_stsourcedir}
 
 %changelog
+* Wed Jul 15 2020 Petr Šabata <contyk@redhat.com> - 0.8.4-1
+- 0.8.4 bump
+
 * Fri Jan 31 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.8.1-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
