@@ -66,7 +66,7 @@ sed -i -e 's/VERSION/%{version}/' \
        ${file}
 done
 mkdir -p %{buildroot}%{_stsourcedir}
-install -m644 config.mk Makefile st.* *.h *.c \
+install -m644 * \
     %{buildroot}%{_stsourcedir}
 touch %{buildroot}%{_bindir}/%{name}
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications %{SOURCE1}
